@@ -396,11 +396,11 @@ const startDate = new Date();
         return;
       }
 
-      // Se prima dell'inizio del periodo → barra ferma a 0
-      if (now <= startDate) {
-        bar.style.width = "0%";
-        return;
-      }
+if (now <= startDate) {
+    bar.style.width = "1%";   // parte dall'1%
+    return;
+}
+
 
       const total = endDate - startDate;
       const elapsed = now - startDate;
