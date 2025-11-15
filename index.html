@@ -12,29 +12,37 @@
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     }
 
+    /* ===========================
+       SFONDO (bg-fjord.jpg)
+       =========================== */
     body {
       min-height: 100vh;
       display: flex;
       align-items: center;
       justify-content: center;
       background:
-        linear-gradient(180deg, rgba(2, 6, 23, 0.65) 0%, rgba(2, 6, 23, 0.85) 35%, #020617 100%),
-        url("bg.jpg") center/cover fixed no-repeat;
-      color: #f9fafb;
+        linear-gradient(
+          180deg,
+          rgba(2, 6, 23, 0.33) 0%,
+          rgba(2, 6, 23, 0.52) 35%,
+          rgba(2, 6, 23, 0.75) 100%
+        ),
+        url("bg-fjord.jpg") center/cover fixed no-repeat;
+      color: #f1f5f9;
       position: relative;
       overflow: hidden;
     }
 
     /* ===========================
-       AURORA BOREALE
+       AURORA BOREALE (soft)
        =========================== */
     .aurora {
       position: fixed;
-      inset: -25%;
+      inset: -30%;
       pointer-events: none;
       z-index: 0;
       opacity: 0;
-      filter: blur(55px); /* forme un po' più visibili */
+      filter: blur(80px);
       mix-blend-mode: screen;
       background-repeat: no-repeat;
       background-size: 140% 140%;
@@ -42,83 +50,49 @@
 
     .aurora-1 {
       background-image:
-        radial-gradient(circle at 10% 0%, rgba(45, 212, 191, 0.6), transparent 60%),
-        radial-gradient(circle at 70% 40%, rgba(56, 189, 248, 0.45), transparent 60%);
-      animation: auroraWave1 26s ease-in-out infinite alternate;
+        radial-gradient(circle at 10% 0%, rgba(45, 212, 191, 0.30), transparent 60%),
+        radial-gradient(circle at 70% 40%, rgba(56, 189, 248, 0.26), transparent 60%);
+      animation: aurora1 30s ease-in-out infinite alternate;
     }
 
     .aurora-2 {
       background-image:
-        radial-gradient(circle at 20% 80%, rgba(147, 51, 234, 0.45), transparent 58%),
-        radial-gradient(circle at 90% 10%, rgba(59, 130, 246, 0.4), transparent 60%);
-      animation: auroraWave2 32s ease-in-out infinite alternate;
+        radial-gradient(circle at 20% 80%, rgba(147, 51, 234, 0.28), transparent 58%),
+        radial-gradient(circle at 90% 10%, rgba(59, 130, 246, 0.22), transparent 60%);
+      animation: aurora2 36s ease-in-out infinite alternate;
     }
 
     .aurora-3 {
       background-image:
-        radial-gradient(circle at 50% 10%, rgba(34, 197, 94, 0.4), transparent 60%),
-        radial-gradient(circle at 80% 70%, rgba(129, 140, 248, 0.38), transparent 60%);
-      animation: auroraWave3 38s ease-in-out infinite alternate;
+        radial-gradient(circle at 50% 10%, rgba(34, 197, 94, 0.22), transparent 60%),
+        radial-gradient(circle at 80% 70%, rgba(129, 140, 248, 0.20), transparent 60%);
+      animation: aurora3 42s ease-in-out infinite alternate;
     }
 
-    @keyframes auroraWave1 {
-      0% {
-        transform: translate3d(-15%, 10%, 0) scale(1.05);
-        opacity: 0;
-      }
-      25% {
-        opacity: 0.28;
-      }
-      60% {
-        transform: translate3d(5%, -5%, 0) scale(1.18);
-        opacity: 0.32;
-      }
-      100% {
-        transform: translate3d(20%, 20%, 0) scale(1.25);
-        opacity: 0;
-      }
+    @keyframes aurora1 {
+      0% { transform: translate(-15%, 10%) scale(1.05); opacity: 0; }
+      40% { opacity: 0.27; }
+      80% { transform: translate(10%, -8%) scale(1.22); opacity: 0.33; }
+      100% { transform: translate(25%, 20%) scale(1.35); opacity: 0; }
     }
 
-    @keyframes auroraWave2 {
-      0% {
-        transform: translate3d(10%, -10%, 0) scale(1.02);
-        opacity: 0;
-      }
-      30% {
-        opacity: 0.22;
-      }
-      70% {
-        transform: translate3d(-10%, 15%, 0) scale(1.2);
-        opacity: 0.3;
-      }
-      100% {
-        transform: translate3d(-22%, 5%, 0) scale(1.28);
-        opacity: 0;
-      }
+    @keyframes aurora2 {
+      0% { transform: translate(10%, -10%) scale(1.05); opacity: 0; }
+      40% { opacity: 0.18; }
+      80% { transform: translate(-10%, 20%) scale(1.2); opacity: 0.26; }
+      100% { transform: translate(-22%, 5%) scale(1.38); opacity: 0; }
     }
 
-    @keyframes auroraWave3 {
-      0% {
-        transform: translate3d(0%, 15%, 0) scale(1.05);
-        opacity: 0;
-      }
-      40% {
-        opacity: 0.18;
-      }
-      80% {
-        transform: translate3d(10%, -15%, 0) scale(1.18);
-        opacity: 0.25;
-      }
-      100% {
-        transform: translate3d(-10%, 5%, 0) scale(1.26);
-        opacity: 0;
-      }
+    @keyframes aurora3 {
+      0% { transform: translate(0%, 20%) scale(1.05); opacity: 0; }
+      40% { opacity: 0.15; }
+      80% { transform: translate(15%, -20%) scale(1.25); opacity: 0.22; }
+      100% { transform: translate(-10%, 10%) scale(1.33); opacity: 0; }
     }
 
     /* ===========================
-       CONTENUTO
+       STRUTTURA CONTENUTO
        =========================== */
-
     .overlay {
       position: relative;
       z-index: 1;
@@ -133,7 +107,7 @@
     @media (max-width: 768px) {
       .overlay {
         grid-template-columns: 1fr;
-        padding: 1.9rem 1.2rem;
+        padding: 2rem 1.2rem;
       }
     }
 
@@ -149,15 +123,15 @@
       font-size: 0.7rem;
       letter-spacing: 0.28em;
       text-transform: uppercase;
-      color: #9ca3af;
+      color: #cbd5e1;
       margin-bottom: 1.8rem;
     }
 
     .meta-row {
       font-size: 0.7rem;
       text-transform: uppercase;
-      letter-spacing: 0.2em;
-      color: #9ca3af;
+      letter-spacing: 0.18em;
+      color: #94a3b8;
       display: flex;
       justify-content: center;
       gap: 1.5rem;
@@ -165,11 +139,11 @@
     }
 
     .meta-row span:nth-child(2) {
-      color: #e5e7eb;
+      color: #e2e8f0;
     }
 
     .bar-wrapper {
-      margin: 1.8rem auto 0;
+      margin: 2rem auto 0;
       width: 100%;
       max-width: 420px;
     }
@@ -178,30 +152,40 @@
       width: 100%;
       height: 18px;
       border-radius: 999px;
-      border: 1px solid rgba(209, 213, 219, 0.6);
+      border: 1px solid rgba(148, 163, 184, 0.5);
       padding: 2px;
-      background: rgba(15, 23, 42, 0.8);
+      background: rgba(15, 23, 42, 0.65);
       overflow: hidden;
+      backdrop-filter: blur(3px);
     }
 
+    /* ===========================
+       BARRA COLORI AURORA (SOFT)
+       =========================== */
     .bar-fill {
       width: 0%;
       height: 100%;
       border-radius: 999px;
-      background: linear-gradient(90deg, #22c55e, #0ea5e9, #4f46e5, #a855f7);
-      background-size: 200% 100%;
-      box-shadow: 0 0 12px rgba(56, 189, 248, 0.4);
-      transition: width 0.5s ease-out;
-      animation: auroraBar 6s ease-in-out infinite alternate;
+
+      background: linear-gradient(
+        90deg,
+        #3b9c78,
+        #2f8fac,
+        #3f4fb6,
+        #7d58c8
+      );
+      background-size: 180% 100%;
+      transition: width 0.4s ease-out;
+
+      animation: auroraBar 9s ease-in-out infinite alternate;
+      box-shadow:
+        0 0 8px rgba(79, 140, 180, 0.28),
+        0 0 14px rgba(79, 140, 180, 0.15);
     }
 
     @keyframes auroraBar {
-      0% {
-        background-position: 0% 50%;
-      }
-      100% {
-        background-position: 100% 50%;
-      }
+      0% { background-position: 0% 50%; }
+      100% { background-position: 100% 50%; }
     }
 
     .loading-text {
@@ -213,10 +197,10 @@
     }
 
     .loading-text span {
-      display: block;
       font-size: 0.7rem;
-      color: #9ca3af;
+      color: #94a3b8;
       margin-top: 0.2rem;
+      display: block;
     }
 
     .right {
@@ -224,31 +208,26 @@
       text-align: right;
       font-size: 0.7rem;
       text-transform: uppercase;
-      letter-spacing: 0.19em;
-      color: #9ca3af;
-    }
-
-    .right-line {
-      margin-bottom: 0.5rem;
+      letter-spacing: 0.18em;
+      color: #cbd5e1;
     }
 
     @media (max-width: 768px) {
-      .right {
-        text-align: center;
-      }
+      .right { text-align: center; }
     }
 
-    /* ===========================
-       SCHERMATA FINALE LOCANDINA
-       =========================== */
+    .right-line { margin-bottom: 0.5rem; }
 
+    /* ===========================
+       REVEAL LOCANDINA
+       =========================== */
     .reveal {
       position: fixed;
       inset: 0;
       display: flex;
       align-items: center;
       justify-content: center;
-      background: radial-gradient(circle at top, #020617 0%, #020617 55%, #000 100%);
+      background: radial-gradient(circle at top, #020617 0%, #0a0f20 60%, #000 100%);
       opacity: 0;
       pointer-events: none;
       transition: opacity 0.8s ease-out;
@@ -265,30 +244,21 @@
       max-width: 700px;
       width: 100%;
       background: #020617;
-      border-radius: 1.5rem;
-      border: 1px solid rgba(148, 163, 184, 0.6);
-      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.65);
+      border-radius: 1.3rem;
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      box-shadow: 0 25px 70px rgba(0,0,0,0.75);
       overflow: hidden;
     }
 
     .poster-frame img {
-      display: block;
       width: 100%;
-      height: auto;
-    }
-
-    .poster-caption {
-      padding: 0.9rem 1.2rem;
-      font-size: 0.75rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: #9ca3af;
-      text-align: center;
+      display: block;
     }
   </style>
 </head>
+
 <body>
-  <!-- AURORA ANIMATA SOPRA ALLO SFONDO -->
+  <!-- AURORA -->
   <div class="aurora aurora-1"></div>
   <div class="aurora aurora-2"></div>
   <div class="aurora aurora-3"></div>
@@ -325,50 +295,44 @@
     </div>
   </div>
 
-  <!-- SCHERMATA FINALE CON LOCANDINA -->
+  <!-- REVEAL LOCANDINA -->
   <div class="reveal" id="reveal">
     <div class="poster-frame">
-      <!-- Quando ce l'hai, metti qui la tua locandina con questo nome -->
-      <img src="locandina-laurea.jpg" alt="Locandina festa di laurea" />
-      <div class="poster-caption">
-        festa di laurea – dettagli ufficiali
-      </div>
+      <img src="locandina-laurea.jpg" alt="Locandina festa" />
     </div>
   </div>
 
   <script>
-    // =====================================
-    // VERSIONE TEST: BARRA COMPLETATA IN 2 MINUTI
-    // =====================================
-    const TEST_DURATION_MS = 2 * 60 * 1000; // 2 minuti
+    /* VERSIONE TEST: 2 MINUTI */
+    const TEST_DURATION = 2 * 60 * 1000;
 
-    // Alla apertura della pagina:
-    const startDate = new Date();
-    const endDate = new Date(startDate.getTime() + TEST_DURATION_MS);
+    const start = new Date();
+    const end = new Date(start.getTime() + TEST_DURATION);
 
-    const progressBar = document.getElementById("progressBar");
+    const bar = document.getElementById("progressBar");
     const reveal = document.getElementById("reveal");
 
-    function updateProgress() {
+    function update() {
       const now = new Date();
-
-      if (now >= endDate) {
-        progressBar.style.width = "100%";
+      if (now >= end) {
+        bar.style.width = "100%";
         reveal.classList.add("visible");
         return;
       }
 
-      const total = endDate - startDate;
-      const elapsed = now - startDate;
+      const total = end - start;
+      const elapsed = now - start;
+      const percent = Math.min(100, (elapsed / total) * 100);
 
-      let percent = (elapsed / total) * 100;
-      if (percent < 0) percent = 0;
-      if (percent > 100) percent = 100;
-
-      progressBar.style.width = percent.toFixed(2) + "%";
+      bar.style.width = percent + "%";
     }
 
-    updateProgress();
+    update();
+    setInterval(update, 200);
+  </script>
+</body>
+</html>
+
     setInterval(updateProgress, 1000); // aggiorna ogni secondo per il test
   </script>
 </body>
