@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <title>Loading… Festa di laurea</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background:
+        linear-gradient(180deg, #020617 0%, #0b1120 40%, #020617 100%),
+        url("background.jpg") center/cover fixed no-repeat;
+      color: #f9fafb;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* effetto “grana” tipo poster */
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background-image: url("https://i.imgur.com/8Km9tLL.png");
+      mix-blend-mode: soft-light;
+      opacity: 0.18;
+      pointer-events: none;
+    }
+
+    .overlay {
+      position: relative;
+      z-index: 1;
+      max-width: 900px;
+      width: 100%;
+      padding: 2.5rem 1.5rem;
+      display: grid;
+      grid-template-columns: minmax(0, 2fr) minmax(0, 1.4fr);
+      gap: 2rem;
+    }
+
+    @media (max-width: 768px) {
+      .overlay {
+        grid-template-columns: 1fr;
+        padding: 1.8rem 1.2rem;
+      }
+    }
+
+    .left {
+      align-self: flex-end;
+    }
+
+    .label {
+      font-size: 0.7rem;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: #9ca3af;
+      margin-bottom: 1rem;
+    }
+
+    .title {
+      font-size: clamp(1.9rem, 5vw, 2.8rem);
+      font-weight: 700;
+      line-height: 1.1;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 2.4rem;
+    }
+
+    .title span {
+      display: block;
+    }
+
+    .meta-row {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: #9ca3af;
+      display: flex;
+      gap: 1.5rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .meta-row span:nth-child(2) {
+      color: #e5e7eb;
+    }
+
+    .bar-wrapper {
+      margin-top: 1.5rem;
+      width: 100%;
+      max-width: 420px;
+    }
+
+    .bar-track {
+      width: 100%;
+      height: 18px;
+      border-radius: 999px;
+      border: 1px solid rgba(209, 213, 219, 0.6);
+      padding: 2px;
+      background: rgba(15, 23, 42, 0.8);
+      overflow: hidden;
+    }
+
+    .bar-fill {
+      width: 0%;
+      height: 100%;
+      border-radius: 999px;
+      background: #f9fafb;
+      transition: width 0.5s ease-out;
+    }
+
+    .loading-text {
+      margin-top: 0.6rem;
+      font-size: 0.75rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #e5e7eb;
+    }
+
+    .loading-text span {
+      display: block;
+      font-size: 0.7rem;
+      color: #9ca3af;
+      margin-top: 0.2rem;
+    }
+
+    .right {
+      align-self: center;
+      text-align: right;
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.19em;
+      color: #9ca3af;
+    }
+
+    .right-line {
+      margin-bottom: 0.5rem;
+    }
+
+    /* SEZIONE FINALE CON LOCANDINA (inizialmente nascosta) */
+    .reveal {
+      position: fixed;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: radial-gradient(circle at top, #0b1120 0%, #020617 55%, #000 100%);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.8s ease-out;
+      z-index: 10;
+      padding: 1.5rem;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .poster-frame {
+      max-width: 700px;
+      width: 100%;
+      background: #020617;
+      border-radius: 1.5rem;
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.65);
+      overflow: hidden;
+    }
+
+    .poster-frame img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    .poster-caption {
+      padding: 0.9rem 1.2rem;
+      font-size: 0.75rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #9ca3af;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <!-- Schermata “poster + barra” -->
+  <div class="overlay">
+    <div class="left">
+      <div class="label">loading sequence</div>
+      <h1 class="title">
+        <span>THE ESSENCE</span>
+        <span>OF MY</span>
+        <span>GRAD PARTY</span>
+      </h1>
+
+      <div class="meta-row">
+        <span>status</span>
+        <span>in progress</span>
+      </div>
+      <div class="meta-row">
+        <span>access</span>
+        <span>invite only</span>
+      </div>
+
+      <div class="bar-wrapper">
+        <div class="bar-track">
+          <div class="bar-fill" id="progressBar"></div>
+        </div>
+        <p class="loading-text">
+          loading
+          <span>please wait…</span>
+        </p>
+      </div>
+    </div>
+
+    <div class="right">
+      <div class="right-line">coordinates: private</div>
+      <div class="right-line">host: [il tuo nome]</div>
+      <div class="right-line">access code: secret</div>
+    </div>
+  </div>
+
+  <!-- Schermata finale con locandina -->
+  <div class="reveal" id="reveal">
+    <div class="poster-frame">
+      <!-- QUANDO AVRAI LA LOCANDINA: metti qui il file, es. "locandina-laurea.jpg" -->
+      <img src="locandina-laurea.jpg" alt="Locandina festa di laurea" />
+      <div class="poster-caption">
+        festa di laurea – dettagli ufficiali
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // ================================
+    // IMPOSTA QUI LA DATA DI FINE
+    // ================================
+    // Il countdown è invisibile, ma la barra arriverà a 100% quando
+    // la data qui sotto viene raggiunta.
+    //
+    // Formato: "YYYY-MM-DDTHH:MM:SS"
+    // Esempio: 1 dicembre 2025 alle 20:00
+    const endDate = new Date("2025-12-01T20:00:00");
+
+    // Durata di riferimento: 14 giorni prima della endDate
+    const TWO_WEEKS_MS = 14 * 24 * 60 * 60 * 1000;
+    const startDate = new Date(endDate.getTime() - TWO_WEEKS_MS);
+
+    const progressBar = document.getElementById("progressBar");
+    const reveal = document.getElementById("reveal");
+
+    function updateProgress() {
+      const now = new Date();
+
+      // Se siamo oltre la fine → mostra direttamente la locandina
+      if (now >= endDate) {
+        progressBar.style.width = "100%";
+        reveal.classList.add("visible");
+        return;
+      }
+
+      const total = endDate - startDate;
+      const elapsed = now - startDate;
+
+      let percent = (elapsed / total) * 100;
+      if (percent < 0) percent = 0;
+      if (percent > 100) percent = 100;
+
+      progressBar.style.width = percent.toFixed(2) + "%";
+    }
+
+    updateProgress();
+    setInterval(updateProgress, 30000); // aggiorna ogni 30 secondi
+  </script>
+</body>
+</html>
