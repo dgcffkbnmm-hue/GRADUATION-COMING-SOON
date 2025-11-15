@@ -380,9 +380,8 @@
     // Data/ora di sblocco (ora locale)
     const endDate = new Date("2025-12-01T20:00:00");
 
-    // 14 giorni prima
-    const TWO_WEEKS_MS = 14 * 24 * 60 * 60 * 1000;
-    const startDate = new Date(endDate.getTime() - TWO_WEEKS_MS);
+// inizia ora
+const startDate = new Date();
 
     const bar = document.getElementById("progressBar");
     const reveal = document.getElementById("reveal");
